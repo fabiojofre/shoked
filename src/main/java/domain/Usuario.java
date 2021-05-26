@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import enuns.EnumPoder;
 import enuns.EnumStatusCadastro;
@@ -26,17 +27,22 @@ public class Usuario implements Serializable{
 	private Integer ativo;
 	
 	
-	@ManyToOne
-
+	@OneToOne
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 	
+	@ManyToOne
+	@JoinColumn(name = "setor_id")
+	private Setor setor;
 	
+	@ManyToOne
+	@JoinColumn(name = "area_id")
+	private Area area;
 	public Usuario() {
 	}
 
 	public Usuario(Integer id, String nome, String email, String senha, EnumPoder poder, EnumStatusCadastro ativo,
-			Pessoa pessoa) {
+			Pessoa pessoa, Setor setor, Area area) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -45,9 +51,27 @@ public class Usuario implements Serializable{
 		this.poder = poder.getCod();
 		this.ativo = ativo.getCod();
 		this.pessoa = pessoa;
+		this.setor = setor;
+		this.area = area;
 	}
 
 	
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
 
 	public Integer getId() {
 		return id;
